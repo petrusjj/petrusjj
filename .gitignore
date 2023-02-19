@@ -18,3 +18,5 @@ web-build/
 
 # Firebase
 .firebase
+google-services.json
+GoogleService-Info.plist
