@@ -7,7 +7,9 @@
     "start": "yarn clear-watchman && expo start",
     "android": "yarn clear-watchman && expo start --android",
     "ios": "yarn clear-watchman && expo start --ios",
-    "web": "yarn clear-watchman && expo start --web"
+    "web": "yarn clear-watchman && expo start --web",
+    "predeploy": "expo export:web",
+    "deploy-hosting": "yarn predeploy && firebase deploy --only hosting"
   },
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
