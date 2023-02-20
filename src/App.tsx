@@ -6,16 +6,11 @@ import { useEffect } from "react";
 import Download from "./components/Download";
 
 import {
-  connectFunctionsEmulator,
   getFunctions,
   httpsCallable
 } from "firebase/functions";
 
 const functions = getFunctions();
-
-if (__DEV__) {
-  connectFunctionsEmulator(functions, "localhost", 5001);
-}
 
 export default function App() {
   useEffect(() => {
