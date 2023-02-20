@@ -57,7 +57,3 @@ dist/
 # env
 cors.json
 .env
-
-# Firebase
-GoogleService-Info.plist
-google-services.json

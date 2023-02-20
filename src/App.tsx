@@ -13,7 +13,9 @@ import {
 
 const functions = getFunctions();
 
-connectFunctionsEmulator(functions, "localhost", 5001);
+if (__DEV__) {
+  connectFunctionsEmulator(functions, "localhost", 5001);
+}
 
 export default function App() {
   useEffect(() => {

@@ -10,7 +10,7 @@
     "ios": "yarn clear-watchman && expo run:ios",
     "web": "yarn clear-watchman && expo start --web -c",
     "predeploy": "expo export:web",
-    "deploy-hosting": "yarn predeploy && firebase deploy --only hosting"
+    "deploy": "yarn predeploy && firebase deploy --only hosting"
   },
   "dependencies": {
     "expo": "~48.0.1",
