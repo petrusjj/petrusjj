@@ -13,7 +13,6 @@ import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
-  // authDomain: __DEV__ ? "http://localhost:19006" : FIREBASE_AUTH_DOMAIN,
   authDomain: FIREBASE_AUTH_DOMAIN,
   projectId: FIREBASE_PROJECT_ID,
   storageBucket: FIREBASE_STORAGE_BUCKET,
