@@ -2,13 +2,10 @@ import { AntDesign } from "@expo/vector-icons";
 import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Download from "../components/Download";
-import useAuth from "../hooks/useAuth";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Resume = () => {
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
-
-  const { logout } = useAuth();
+  const { currentUser, logout } = useContext(AuthContext);
 
   const {
     user: { displayName },

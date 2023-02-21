@@ -1,13 +1,10 @@
 import { FontAwesome } from "@expo/vector-icons";
-import * as WebBrowser from "expo-web-browser";
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
-import useAuth from "../hooks/useAuth";
-
-WebBrowser.maybeCompleteAuthSession();
+import { AuthContext } from "../providers/AuthProvider";
 
 const Authentication = () => {
-  const { googleSignIn } = useAuth();
+  const { googleSignIn } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>

@@ -1,40 +1,27 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import React, { createContext } from "react";
+import useAuth from "../hooks/useAuth";
 import Auth from "../screens/Auth";
 
 type IAuthProvider = {
   children: React.ReactNode;
 };
 
-export interface IAuthContext {
-  currentUser: any;
-  setCurrentUser: (user: any) => void;
-}
-
 export const AuthContext = createContext({
+  googleSignIn: () => {},
+  logout: () => {},
   currentUser: null,
-  setCurrentUser: (user: any) => {},
+  setCurrentUser: (_: any) => {},
 });
 
 const AuthProvider = (props: IAuthProvider) => {
   const { children } = props;
 
-  const [currentUser, setCurrentUser] = useState<any>(null);
-
-  useEffect(() => {
-    checkIfLoggedIn();
-  }, []);
-
-  const checkIfLoggedIn = useCallback(async () => {
-    if (currentUser) return;
-    const raw = await AsyncStorage.getItem("currentUser");
-    if (!raw) return;
-    const user = JSON.parse(raw);
-    setCurrentUser(user);
-  }, [currentUser]);
+  const { googleSignIn, logout, currentUser, setCurrentUser } = useAuth();
 
   return (
-    <AuthContext.Provider value={{ currentUser, setCurrentUser }}>
+    <AuthContext.Provider
+      value={{ googleSignIn, logout, currentUser, setCurrentUser }}
+    >
       {currentUser ? children : <Auth />}
     </AuthContext.Provider>
   );

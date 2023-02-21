@@ -6,16 +6,21 @@ import {
     GoogleAuthProvider,
     signInWithCredential
 } from "firebase/auth";
-import { useCallback, useContext, useEffect } from "react";
-import { AuthContext } from "../providers/AuthProvider";
+import { useCallback, useEffect, useState } from "react";
+
+import * as WebBrowser from "expo-web-browser";
+
+WebBrowser.maybeCompleteAuthSession();
 
 type IUseAuth = {
   googleSignIn: () => void;
   logout: () => void;
+  currentUser: any;
+  setCurrentUser: (_: any) => void;
 };
 
 export default (): IUseAuth => {
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     clientId: FIREBASE_CLIENT_ID,
@@ -30,13 +35,23 @@ export default (): IUseAuth => {
     setCurrentUser(null);
   }, []);
 
+  const checkIfLoggedIn = useCallback(async () => {
+    if (currentUser) return;
+    const raw = await AsyncStorage.getItem("currentUser");
+    if (!raw) return;
+    const user = JSON.parse(raw);
+    setCurrentUser(user);
+  }, [currentUser]);
+
   useEffect(() => {
-    console.log("effect response", currentUser, response);
-    if (!currentUser && response?.type === "success") {
-      console.log("effect response inside", currentUser, response);
+    if (response?.type === "success") {
       authenticate(response);
     }
   }, [response]);
+
+  useEffect(() => {
+    checkIfLoggedIn();
+  }, []);
 
   const authenticate = useCallback(async (response: any) => {
     const { id_token } = response.params;
@@ -48,5 +63,5 @@ export default (): IUseAuth => {
     setCurrentUser(user);
   }, []);
 
-  return { googleSignIn, logout };
+  return { googleSignIn, logout, currentUser, setCurrentUser };
 };
