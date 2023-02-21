@@ -9,7 +9,7 @@ admin.initializeApp();
 const corsHandler = cors({origin: true});
 
 const handler = (res: functions.Response<unknown>) => {
-  res.send(JSON.stringify({data: "Test?!"}));
+  res.send(JSON.stringify({data: "Petrus?!"}));
 };
 
 export const helloWorld = functions.https.onRequest((req, res) => {
