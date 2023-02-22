@@ -1,4 +1,6 @@
-import { FIREBASE_CLIENT_ID } from "@env";
+import {
+  FIREBASE_CLIENT_ID_ANDROID, FIREBASE_CLIENT_ID_IOS, FIREBASE_CLIENT_ID_WEB
+} from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Google from "expo-auth-session/providers/google";
 import {
@@ -26,7 +28,9 @@ export default (): IUseAuth => {
   const [currentUser, setCurrentUser] = useState(null);
 
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: FIREBASE_CLIENT_ID,
+    clientId: FIREBASE_CLIENT_ID_WEB,
+    iosClientId: FIREBASE_CLIENT_ID_IOS,
+    androidClientId: FIREBASE_CLIENT_ID_ANDROID,
   });
 
   const googleSignIn = useCallback(() => {

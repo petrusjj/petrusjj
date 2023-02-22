@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navigator from "./navigation/Navigator";
 import AuthProvider from "./providers/AuthProvider";
 
@@ -9,7 +10,9 @@ export default function App() {
     <AuthProvider>
       <GestureHandlerRootView style={styles.container}>
         <StatusBar style="auto" />
-        <Navigator />
+        <SafeAreaProvider>
+          <Navigator />
+        </SafeAreaProvider>
       </GestureHandlerRootView>
     </AuthProvider>
   );

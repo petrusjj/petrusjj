@@ -1,4 +1,4 @@
-package com.petrusjj;
+package com.petrusjj.app;
 
 import android.app.Application;
 import android.content.res.Configuration;
