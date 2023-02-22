@@ -14,7 +14,6 @@ export default () => {
   const init = async () => {
     const helloWorld = httpsCallable(functions, "helloWorld");
     const { data } = await helloWorld();
-    console.log(data);
   };
 
   return {};

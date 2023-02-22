@@ -6,14 +6,12 @@ const Stack = createNativeStackNavigator();
 const ProtectedStack = () => {
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+      }}
       initialRouteName={"auth"}
     >
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="fitness"
-        component={Fitness}
-      />
+      <Stack.Screen name="fitness" component={Fitness} />
     </Stack.Navigator>
   );
 };

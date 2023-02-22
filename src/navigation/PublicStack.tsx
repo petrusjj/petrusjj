@@ -7,19 +7,13 @@ const Stack = createNativeStackNavigator();
 const PublicStack = () => {
   return (
     <Stack.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+      }}
       initialRouteName="resume"
     >
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="resume"
-        component={Resume}
-      />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="auth"
-        component={Auth}
-      />
+      <Stack.Screen name="resume" component={Resume} />
+      <Stack.Screen name="auth" component={Auth} />
     </Stack.Navigator>
   );
 };

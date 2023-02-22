@@ -8,7 +8,6 @@ export default () => {
   const onPress = async () => {
     const fileName = "fithero-backup-2023-02-19.json";
     const data = await downloadFromStorage(fileName);
-    console.log("data", data);
   };
 
   return (

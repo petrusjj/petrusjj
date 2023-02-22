@@ -7,8 +7,6 @@ const Fitness = () => {
 
   const name = currentUser?.user?.displayName;
 
-  console.log("fitness", currentUser);
-
   return (
     <View style={styles.container}>
       <Text>{name || ""}</Text>
