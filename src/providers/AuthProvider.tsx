@@ -1,12 +1,12 @@
 import React, { createContext } from "react";
 import useAuth from "../hooks/useAuth";
-import Auth from "../screens/Auth";
 
 type IAuthProvider = {
   children: React.ReactNode;
 };
 
 export const AuthContext = createContext({
+  hydrating: false,
   googleSignIn: () => {},
   logout: () => {},
   currentUser: null,
@@ -16,13 +16,14 @@ export const AuthContext = createContext({
 const AuthProvider = (props: IAuthProvider) => {
   const { children } = props;
 
-  const { googleSignIn, logout, currentUser, setCurrentUser } = useAuth();
+  const { hydrating, googleSignIn, logout, currentUser, setCurrentUser } =
+    useAuth();
 
   return (
     <AuthContext.Provider
-      value={{ googleSignIn, logout, currentUser, setCurrentUser }}
+      value={{ hydrating, googleSignIn, logout, currentUser, setCurrentUser }}
     >
-      {currentUser ? children : <Auth />}
+      {children}
     </AuthContext.Provider>
   );
 };

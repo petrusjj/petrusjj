@@ -1,27 +1,10 @@
-import { AntDesign } from "@expo/vector-icons";
-import React, { useContext } from "react";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import Download from "../components/Download";
-import { AuthContext } from "../providers/AuthProvider";
 
 const Resume = () => {
-  const { currentUser, logout } = useContext(AuthContext);
-
-  const {
-    user: { displayName },
-  } = currentUser;
-
   return (
     <View style={styles.container}>
-      <Text>{displayName}</Text>
-      <AntDesign.Button
-        name="google"
-        backgroundColor="#EE4B2B"
-        onPress={logout}
-      >
-        Logout
-      </AntDesign.Button>
-      <Download />
+      <Text>Resume</Text>
     </View>
   );
 };
