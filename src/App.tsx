@@ -3,18 +3,15 @@ import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navigator from "./navigation/Navigator";
-import AuthProvider from "./providers/AuthProvider";
 
 export default function App() {
   return (
-    <AuthProvider>
-      <GestureHandlerRootView style={styles.container}>
-        <StatusBar style="auto" />
-        <SafeAreaProvider>
-          <Navigator />
-        </SafeAreaProvider>
-      </GestureHandlerRootView>
-    </AuthProvider>
+    <GestureHandlerRootView style={styles.container}>
+      <StatusBar style="auto" />
+      <SafeAreaProvider>
+        <Navigator />
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
 

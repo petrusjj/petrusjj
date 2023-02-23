@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import { useAtom } from "jotai";
 import { StyleSheet, Text, View } from "react-native";
-import { AuthContext } from "../providers/AuthProvider";
+import { currentUserAtom } from "../store/jotai";
 
 const Fitness = () => {
-  const { currentUser } = useContext(AuthContext);
+  const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
 
   const name = currentUser?.user?.displayName;
 

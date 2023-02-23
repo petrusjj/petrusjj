@@ -1,9 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useContext, useEffect } from "react";
+import { useAtom } from "jotai";
+import { useEffect } from "react";
 import Header from "../components/Header";
-import { AuthContext } from "../providers/AuthProvider";
 import Initializer from "../screens/Initializer";
+import { currentUserAtom } from "../store/jotai";
 import { navigationRef } from "./NavigationRef";
 import ProtectedStack from "./ProtectedStack";
 import PublicStack from "./PublicStack";
@@ -45,15 +46,14 @@ const linking = {
 };
 
 const Navigator = () => {
-  const { hydrating, currentUser } = useContext(AuthContext);
+  const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
 
   useEffect(() => {
-    if (!hydrating) {
-      navigationRef.navigate(currentUser ? "protected" : "public", {
-        screen: currentUser ? "fitness" : "resume",
-      });
+    if (!currentUser) {
+      return navigationRef.navigate("public", { screen: "resume" });
     }
-  }, [hydrating]);
+    return navigationRef.navigate("protected", { screen: "fitness" });
+  }, []);
 
   return (
     <NavigationContainer linking={linking} ref={navigationRef}>

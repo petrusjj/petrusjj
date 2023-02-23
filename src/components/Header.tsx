@@ -1,23 +1,26 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import React, { useCallback, useContext } from "react";
+import { useAtom } from "jotai";
+import React, { useCallback } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { AuthContext } from "../providers/AuthProvider";
+import useAuth from "../hooks/useAuth";
+import { currentUserAtom } from "../store/jotai";
 
 const Header = () => {
   const { navigate } = useNavigation();
 
-  const { hydrating, currentUser, logout } = useContext(AuthContext);
+  const { logout } = useAuth();
+
+  const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
 
   const navigateToResume = useCallback(() => {
     navigate("public", { screen: "resume" });
   }, []);
 
   const navigateToFitness = useCallback(() => {
-    navigate(currentUser ? "protected" : "public", {
-      screen: currentUser ? "fitness" : "auth",
-    });
+    if (!currentUser) return navigate("public", { screen: "auth" });
+    return navigate("protected", { screen: "fitness" });
   }, [currentUser]);
 
   return (
@@ -30,7 +33,7 @@ const Header = () => {
           <Text>Fitness</Text>
         </TouchableOpacity>
         <View style={styles.spacer} />
-        {!hydrating && currentUser ? (
+        {currentUser ? (
           <AntDesign.Button
             name="google"
             backgroundColor="#EE4B2B"
@@ -54,6 +57,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     flexDirection: "row",
     backgroundColor: "#CCCCCC",
+    alignItems: 'center',
+    height: 80,
   },
   button: {
     marginRight: 32,
