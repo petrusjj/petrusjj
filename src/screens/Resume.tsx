@@ -1,18 +1,40 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import useFirestore from "../hooks/useFirestore";
+import { useAtomValue } from "jotai";
+import { useCallback } from "react";
+import {
+  StyleSheet,
+  Text, View
+} from "react-native";
+import useResume from "../hooks/useResume";
+import { employmentsAtom } from "../store/jotai";
 
 const Resume = () => {
-  const { listEmployments, addDocument } = useFirestore();
+  const { listEmployments } = useResume();
+
+  const employments = useAtomValue(employmentsAtom);
+
+  console.log("render employments", employments);
+
+  const renderEmployment = useCallback(({ item }) => {
+    const { name } = item;
+    return (
+      <View>
+        <Text>{name}</Text>
+      </View>
+    );
+  }, []);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={listEmployments}>
+      {/* <TouchableOpacity onPress={listEmployments}>
         <Text>Test</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={addDocument}>
-        <Text>Add</Text>
-      </TouchableOpacity>
+      <View>
+        <FlatList
+          data={employments}
+          renderItem={renderEmployment}
+          keyExtractor={(item) => item.id}
+        />
+      </View> */}
     </View>
   );
 };

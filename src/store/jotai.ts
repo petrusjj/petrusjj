@@ -8,3 +8,5 @@ export const currentUserAtom = atomWithStorage<unknown | false>(
   false,
   storage
 );
+
+export const employmentsAtom = atomWithStorage<any>("employments", [], storage);

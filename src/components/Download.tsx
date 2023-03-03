@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, View } from "react-native";
-import useStorage from "../hooks/useStorage";
+import useStorage from "../hooks/core/useStorage";
 
 export default () => {
   const { downloadFromStorage } = useStorage();

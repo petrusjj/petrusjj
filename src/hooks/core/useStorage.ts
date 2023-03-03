@@ -1,5 +1,5 @@
 import { getDownloadURL, ref } from "firebase/storage";
-import { storage } from "../utils/firebase";
+import { storage } from "../../utils/firebase";
 
 type IUseStorage = {
   downloadFromStorage: (fileName: string) => Promise<void>;

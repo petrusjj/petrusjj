@@ -1,12 +1,10 @@
 import { httpsCallable } from "firebase/functions";
 import { useEffect } from "react";
-import { functions } from "../utils/firebase";
+import { functions } from "../../utils/firebase";
 
 export default () => {
   useEffect(() => {
-    setTimeout(() => {
-      //   init();
-    }, 2000);
+    //   init();
   }, []);
 
   const init = async () => {
