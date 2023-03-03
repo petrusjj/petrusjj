@@ -1,3 +1,10 @@
-import { atomWithStorage } from "jotai/utils";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { atomWithStorage, createJSONStorage } from "jotai/utils";
 
-export const currentUserAtom: any = atomWithStorage("currentUser", false);
+const storage = createJSONStorage(() => AsyncStorage);
+
+export const currentUserAtom = atomWithStorage<unknown | false>(
+  "currentUser",
+  false,
+  storage
+);

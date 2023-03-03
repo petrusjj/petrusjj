@@ -1,5 +1,3 @@
-import { initializeApp } from "firebase/app";
-
 import {
   FIREBASE_API_KEY,
   FIREBASE_APP_ID,
@@ -9,7 +7,12 @@ import {
   FIREBASE_PROJECT_ID,
   FIREBASE_STORAGE_BUCKET
 } from "@env";
+import { initializeApp } from "firebase/app";
+import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
 import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
+import { connectStorageEmulator, getStorage } from "firebase/storage";
+
+import config from "../../firebase.json";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -21,10 +24,20 @@ const firebaseConfig = {
   measurementId: FIREBASE_MEASUREMENT_ID,
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-const functions = getFunctions();
+const functions = getFunctions(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+const { emulators } = config;
 
 if (__DEV__) {
-  connectFunctionsEmulator(functions, "localhost", 5001);
+  connectFunctionsEmulator(functions, "localhost", emulators.functions.port);
+  connectFirestoreEmulator(db, "localhost", emulators.firestore.port);
+  connectStorageEmulator(storage, "localhost", emulators.storage.port);
 }
+
+export { db, functions, storage };
+
+export default app;

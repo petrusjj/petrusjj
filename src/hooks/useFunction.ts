@@ -1,8 +1,6 @@
-
-import { getFunctions, httpsCallable } from "firebase/functions";
+import { httpsCallable } from "firebase/functions";
 import { useEffect } from "react";
-
-const functions = getFunctions();
+import { functions } from "../utils/firebase";
 
 export default () => {
   useEffect(() => {

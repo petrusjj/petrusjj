@@ -2,13 +2,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Auth from "../screens/Auth";
 import Resume from "../screens/Resume";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<any>();
 
 const PublicStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        title: "petrusjj",
       }}
       initialRouteName="resume"
     >

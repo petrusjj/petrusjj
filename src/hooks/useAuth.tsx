@@ -12,9 +12,10 @@ import {
 import { useAtom } from "jotai";
 import { useCallback, useEffect } from "react";
 
+import { useNavigation } from "@react-navigation/native";
 import * as WebBrowser from "expo-web-browser";
-import { navigationRef } from "../navigation/NavigationRef";
 import { currentUserAtom } from "../store/jotai";
+import { RootStackParamList } from "../types/navigation";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -26,6 +27,8 @@ type IUseAuth = {
 };
 
 export default (): IUseAuth => {
+  const { navigate } = useNavigation<RootStackParamList>();
+
   const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
 
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
@@ -40,7 +43,7 @@ export default (): IUseAuth => {
 
   const logout = useCallback(async () => {
     setCurrentUser(null);
-    navigationRef?.navigate("public");
+    navigate("public");
   }, []);
 
   useEffect(() => {
@@ -49,17 +52,14 @@ export default (): IUseAuth => {
     }
   }, [response]);
 
-  const authenticate = useCallback(
-    async (response: any) => {
-      const { id_token } = response.params;
-      const auth = getAuth();
-      const credential = GoogleAuthProvider.credential(id_token);
-      const user = await signInWithCredential(auth, credential);
-      if (!user) return; // TODO: show error modal
-      setCurrentUser(user);
-    },
-    [navigationRef]
-  );
+  const authenticate = useCallback(async (response: any) => {
+    const { id_token } = response.params;
+    const auth = getAuth();
+    const credential = GoogleAuthProvider.credential(id_token);
+    const user = await signInWithCredential(auth, credential);
+    if (!user) return; // TODO: show error modal
+    setCurrentUser(user);
+  }, []);
 
   return { googleSignIn, logout, currentUser, setCurrentUser };
 };

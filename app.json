@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "petrusjj",
+    "icon": "./src/assets/favicon/favicon.png",
     "slug": "petrusjj",
     "version": "1.0.0",
     "ios": {

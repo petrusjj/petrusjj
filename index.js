@@ -1,10 +1,8 @@
 import { registerRootComponent } from "expo";
-import "react-native-gesture-handler";
-
-import "./src/utils/firebase";
-
 import { LogBox } from "react-native";
+import "react-native-gesture-handler";
 import App from "./src/App";
+import "./src/utils/firebase";
 
 LogBox.ignoreAllLogs();
 

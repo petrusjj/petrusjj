@@ -1,10 +1,9 @@
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../utils/firebase";
 
 type IUseStorage = {
   downloadFromStorage: (fileName: string) => Promise<void>;
 };
-
-const storage = getStorage();
 
 export default (): IUseStorage => {
   const handleStorageError = (error) => {

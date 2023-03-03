@@ -1,29 +1,26 @@
+import { Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useFonts } from "expo-font";
 import { useAtom } from "jotai";
-import { useEffect } from "react";
+import { loadable } from "jotai/utils";
+import { useCallback, useEffect } from "react";
 import Header from "../components/Header";
 import Initializer from "../screens/Initializer";
 import { currentUserAtom } from "../store/jotai";
+import { RootStack } from "../types/navigation";
 import { navigationRef } from "./NavigationRef";
 import ProtectedStack from "./ProtectedStack";
 import PublicStack from "./PublicStack";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStack>();
 
-const config = {
+const config: any = {
   screens: {
-    initializer: {
-      screens: {
-        initializer: {
-          path: "",
-        },
-      },
-    },
     public: {
       screens: {
         resume: {
-          path: "resume",
+          path: "",
         },
         auth: {
           path: "auth",
@@ -45,15 +42,30 @@ const linking = {
   config,
 };
 
+const loadableAtom = loadable(currentUserAtom);
+
 const Navigator = () => {
-  const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
+  const [user] = useAtom<any>(loadableAtom);
+
+  const currentUser = user?.data;
+
+  let [fontsLoaded] = useFonts({
+    Inter_700Bold,
+    Inter_400Regular,
+  });
 
   useEffect(() => {
-    if (!currentUser) {
+    if (fontsLoaded && currentUser !== false) init();
+  }, [fontsLoaded]);
+
+  const init = useCallback(async () => {
+    if (currentUser === null) {
       return navigationRef.navigate("public", { screen: "resume" });
     }
     return navigationRef.navigate("protected", { screen: "fitness" });
-  }, []);
+  }, [currentUser]);
+
+  if (!fontsLoaded || currentUser === false) return <Initializer />;
 
   return (
     <NavigationContainer linking={linking} ref={navigationRef}>
@@ -61,9 +73,8 @@ const Navigator = () => {
         screenOptions={{
           header: () => <Header />,
         }}
-        initialRouteName="initializer"
+        initialRouteName="public"
       >
-        <Stack.Screen name="initializer" component={Initializer} />
         <Stack.Screen name="public" component={PublicStack} />
         {currentUser ? (
           <Stack.Screen name="protected" component={ProtectedStack} />
