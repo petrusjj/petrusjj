@@ -5,6 +5,7 @@
   "scripts": {
     "clear-watchman": "watchman watch-del-all",
     "fresh": "rm -rf yarn.lock && rm -rf node_modules && cd ios && rm -rf Podfile.lock && pod deintegrate && cd .. && yarn && cd ios && pod install && cd .. && cd android && ./gradlew clean && cd ..",
+    "postinstall": "yarn setup-skia-web",
     "start": "yarn clear-watchman && expo start --dev-client -c",
     "android": "yarn clear-watchman && expo run:android",
     "ios": "yarn clear-watchman && expo run:ios",
@@ -21,6 +22,7 @@
     "@react-native/assets-registry": "^0.72.0",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
+    "@shopify/react-native-skia": "^0.1.176",
     "dayjs": "^1.11.7",
     "expo": "^48.0.5",
     "expo-auth-session": "^4.0.3",
@@ -43,6 +45,8 @@
     "@babel/core": "^7.20.0",
     "@expo/webpack-config": "^18.0.1",
     "@types/react": "~18.0.27",
+    "copy-webpack-plugin": "^11.0.0",
+    "node-polyfill-webpack-plugin": "^2.0.1",
     "react-native-dotenv": "^3.4.7",
     "typescript": "^4.9.4"
   },

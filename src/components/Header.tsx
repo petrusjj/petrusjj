@@ -6,7 +6,6 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import useAuth from "../hooks/useAuth";
 import { currentUserAtom } from "../store/jotai";
-import { primary } from "../theme/colors";
 import { spacer } from "../theme/spacing";
 import { heading } from "../theme/typography";
 import { RootStackParamList } from "../types/navigation";
@@ -63,7 +62,6 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     paddingHorizontal: spacer.spacer4,
     flexDirection: "row",
-    backgroundColor: primary.cadetGray,
     alignItems: "center",
     height: 80,
   },
