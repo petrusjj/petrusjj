@@ -10,8 +10,6 @@ const Resume = () => {
 
   const employments = useAtomValue(employmentsAtom);
 
-  console.log("render employments", employments);
-
   const renderEmployment = useCallback(({ item }) => {
     const { name } = item;
     return (
@@ -24,10 +22,10 @@ const Resume = () => {
   return (
     <View style={styles.container}>
       <WithSkiaWeb
-        getComponent={() => import("./Breathe")}
+        getComponent={() => import("../components/Graph")}
         fallback={<Text style={{ textAlign: "center" }}>Loading Skia...</Text>}
       />
-      <Text>Hallo</Text>
+
       {/* <TouchableOpacity onPress={listEmployments}>
         <Text>Test</Text>
       </TouchableOpacity>
@@ -47,7 +45,7 @@ export default Resume;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "stretch",
+    alignItems: "center",
     justifyContent: "center",
   },
 });
