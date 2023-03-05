@@ -1,7 +1,5 @@
 import { registerRootComponent } from "expo";
 import { LogBox } from "react-native";
-import "react-native-gesture-handler";
-import "react-native-reanimated";
 import App from "./src/App";
 import "./src/utils/firebase";
 

@@ -1,18 +1,18 @@
 import {
-    Canvas,
-    Line,
-    Path,
-    runTiming,
-    Skia,
-    SkPath,
-    useComputedValue,
-    useValue,
-    vec
+  Canvas,
+  Line,
+  Path,
+  runTiming,
+  Skia,
+  SkPath,
+  useComputedValue,
+  useValue,
+  vec
 } from "@shopify/react-native-skia";
 import { curveBasis, line, scaleLinear, scaleTime } from "d3";
 import React from "react";
 import { Easing, Pressable, StyleSheet, Text, View } from "react-native";
-import { animatedData, DataPoint, originalData } from "../utils/data";
+import { animatedData, DataPoint, originalData } from "./data";
 
 interface GraphData {
   min: number;

@@ -22,7 +22,7 @@
     "@react-native/assets-registry": "^0.72.0",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
-    "@shopify/react-native-skia": "^0.1.176",
+    "@shopify/react-native-skia": "0.1.172",
     "d3": "^7.8.2",
     "dayjs": "^1.11.7",
     "expo": "^48.0.5",

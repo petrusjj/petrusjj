@@ -22,9 +22,13 @@ const Resume = () => {
   return (
     <View style={styles.container}>
       <WithSkiaWeb
-        getComponent={() => import("../components/Graph")}
+        getComponent={() => import("../examples/Graph/Graph")}
         fallback={<Text style={{ textAlign: "center" }}>Loading Skia...</Text>}
       />
+      {/* <WithSkiaWeb
+        getComponent={() => import("../examples/Wallet/Wallet")}
+        fallback={<Text style={{ textAlign: "center" }}>Loading Skia...</Text>}
+      /> */}
 
       {/* <TouchableOpacity onPress={listEmployments}>
         <Text>Test</Text>
