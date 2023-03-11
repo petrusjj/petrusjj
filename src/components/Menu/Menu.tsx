@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#272636",
     height: buttonHeight,
-    flexDirection: "row",
+    alignItems: "stretch",
   },
   button: {
     height: buttonHeight,
@@ -49,29 +49,39 @@ const styles = StyleSheet.create({
 const buttons = [
   { label: "Resume" },
   { label: "Fitness" },
-  { label: "Travel" },
+  //   { label: "Another" },
+  //   { label: "Another" },
+  //   { label: "Another" },
+  //   { label: "Another" },
+  //   { label: "Another" },
+  //   { label: "Another" },
 ];
 
 const Menu = () => {
   const transition = useValue(0);
+  const flatlistOffset = useValue(0);
 
   const state = useValue({
     active: 0,
     next: 0,
   });
 
+  const onScroll = useCallback((e: any) => {
+    const { contentOffset } = e.nativeEvent;
+    flatlistOffset.current = contentOffset.x;
+  }, []);
+
   const transform = useComputedValue(() => {
     const { active, next } = state.current;
+    console.log(flatlistOffset.current);
     return [
       {
-        translateX: mix(
-          transition.current,
-          active * buttonWidth,
-          next * buttonWidth
-        ),
+        translateX:
+          mix(transition.current, active * buttonWidth, next * buttonWidth) -
+          flatlistOffset.current,
       },
     ];
-  }, [state, transition]);
+  }, [state, transition, flatlistOffset]);
 
   const renderItem = useCallback(({ item, index }) => {
     const { label } = item;
@@ -114,6 +124,7 @@ const Menu = () => {
         </Group>
       </Canvas>
       <FlatList
+        onScroll={onScroll}
         horizontal
         data={buttons}
         renderItem={renderItem}
