@@ -1,8 +1,10 @@
+import { Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
 import type { SkiaValue } from "@shopify/react-native-skia";
 import {
   interpolate,
   Text,
-  useComputedValue, useFont
+  useComputedValue,
+  useFont
 } from "@shopify/react-native-skia";
 import React from "react";
 
@@ -11,7 +13,6 @@ import { PADDING } from "../Model";
 
 import type { GraphState } from "./Selection";
 
-const sfMono = require("../../Severance/SF-Mono-Medium.otf");
 const format = (value: number) =>
   "$ " +
   Math.round(value)
@@ -27,8 +28,8 @@ interface LabelProps {
 }
 
 export const Label = ({ state, y, graphs, width, height }: LabelProps) => {
-  const titleFont = useFont(sfMono, 64);
-  const subtitleFont = useFont(sfMono, 24);
+  const titleFont = useFont(Inter_700Bold, 64);
+  const subtitleFont = useFont(Inter_400Regular, 24);
   const translateY = height + PADDING;
   const AJUSTED_SIZE = height - PADDING * 2;
   const text = useComputedValue(() => {

@@ -71,6 +71,7 @@ const Navigator = () => {
     <NavigationContainer linking={linking} ref={navigationRef}>
       <Stack.Navigator
         screenOptions={{
+          headerShown: false,
           header: () => <Header />,
         }}
         initialRouteName="public"
