@@ -4,8 +4,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
 import { useAtom } from "jotai";
 import { loadable } from "jotai/utils";
-import { useCallback, useEffect } from "react";
-import Header from "../components/Header";
 import Initializer from "../screens/Initializer";
 import { currentUserAtom } from "../store/jotai";
 import { RootStack } from "../types/navigation";
@@ -19,7 +17,7 @@ const config: any = {
   screens: {
     public: {
       screens: {
-        resume: {
+        home: {
           path: "",
         },
         auth: {
@@ -29,8 +27,8 @@ const config: any = {
     },
     protected: {
       screens: {
-        fitness: {
-          path: "fitness",
+        admin: {
+          path: "admin",
         },
       },
     },
@@ -54,25 +52,13 @@ const Navigator = () => {
     Inter_400Regular,
   });
 
-  useEffect(() => {
-    if (fontsLoaded && currentUser !== false) init();
-  }, [fontsLoaded]);
-
-  const init = useCallback(async () => {
-    if (currentUser === null) {
-      return navigationRef.navigate("public", { screen: "resume" });
-    }
-    return navigationRef.navigate("protected", { screen: "fitness" });
-  }, [currentUser]);
-
-  if (!fontsLoaded || currentUser === false) return <Initializer />;
+  if (!fontsLoaded) return <Initializer />;
 
   return (
     <NavigationContainer linking={linking} ref={navigationRef}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          header: () => <Header />,
         }}
         initialRouteName="public"
       >

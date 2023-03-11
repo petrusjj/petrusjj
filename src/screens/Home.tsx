@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import Menu from "../components/Menu";
 
-const Resume = () => {
+const Home = () => {
   return (
     <View style={styles.container}>
       <Menu />
@@ -9,7 +9,7 @@ const Resume = () => {
   );
 };
 
-export default Resume;
+export default Home;
 
 const styles = StyleSheet.create({
   container: {
