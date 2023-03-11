@@ -4,7 +4,7 @@ import {
     Group,
     LinearGradient,
     mix,
-    RoundedRect,
+    Rect,
     runTiming,
     useComputedValue,
     useValue,
@@ -73,7 +73,6 @@ const Menu = () => {
 
   const transform = useComputedValue(() => {
     const { active, next } = state.current;
-    console.log(flatlistOffset.current);
     return [
       {
         translateX:
@@ -108,8 +107,7 @@ const Menu = () => {
     <View style={styles.container}>
       <Canvas style={StyleSheet.absoluteFill}>
         <Group transform={transform}>
-          <RoundedRect
-            r={0}
+          <Rect
             x={0}
             y={0}
             height={buttonHeight}
@@ -120,7 +118,7 @@ const Menu = () => {
               start={vec(0, 0)}
               end={vec(buttonWidth, buttonHeight)}
             />
-          </RoundedRect>
+          </Rect>
         </Group>
       </Canvas>
       <FlatList
