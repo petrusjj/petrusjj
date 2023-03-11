@@ -8,7 +8,7 @@ import { shades } from "./theme/colors";
 export default function App() {
   return (
     <GestureHandlerRootView style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <SafeAreaProvider>
         <Navigator />
       </SafeAreaProvider>

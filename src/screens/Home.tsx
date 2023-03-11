@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import Menu from "../components/Menu";
+import Menu from "../components/Menu/Index";
 
 const Home = () => {
   return (
